@@ -1,1 +1,86 @@
-<h1>Test</h1>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Void SMP | Official Minecraft Server</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts für modernes Design -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome für Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="navbar liquid-glass">
+        <div class="nav-container">
+            <img src="voidsmp.png" alt="Void SMP Logo" class="nav-logo">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#status">Server-Status</a></li>
+                    <li><a href="#" class="btn-shop"><i class="fas fa-shopping-cart"></i> Shop</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="voidsmp.png" alt="Void SMP Riesenlogo" class="hero-logo">
+            <p class="hero-subtitle">Ein einzigartiges Survival-Erlebnis im endlosen Nichts. Bist du bereit für das Void?</p>
+            
+            <div class="ip-container liquid-glass" id="ipCard">
+                <span class="ip-text">play.voidsmp.de</span>
+                <button class="btn-copy" onclick="copyIP()"><i class="far fa-copy"></i> Kopieren</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <h2 class="section-title">Warum Void SMP?</h2>
+        <div class="features-grid">
+            <div class="feature-card liquid-glass">
+                <i class="fas fa-space-shuttle feature-icon"></i>
+                <h3>Custom Welt</h3>
+                <p>Erkunde einzigartige Biome und Dimensionen, die du so noch nie in Minecraft gesehen hast.</p>
+            </div>
+            <div class="feature-card liquid-glass">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <h3>Grief Prevention</h3>
+                <p>Sichere deine Bauwerke und spiele entspannt mit deinen Freunden ohne Angst vor Zerstörung.</p>
+            </div>
+            <div class="feature-card liquid-glass">
+                <i class="fas fa-coins feature-icon"></i>
+                <h3>Echte Wirtschaft</h3>
+                <p>Handle mit Spielern, erstelle eigene Shops und werde zum reichsten Tycoon des Servers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Server Status Section -->
+    <section id="status" class="status-section">
+        <div class="status-card liquid-glass">
+            <h2>Server Status</h2>
+            <div class="status-indicator">
+                <span class="pulse-dot"></span>
+                <span id="server-status-text">Online</span>
+            </div>
+            <p class="player-count"><strong id="player-count">24</strong> Spieler online</p>
+            <p class="version">Version: 1.20.X - 1.21</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Void SMP. Alle Rechte vorbehalten. Nicht mit Mojang/Microsoft verbunden.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
