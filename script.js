@@ -19,8 +19,8 @@ function copyIP(ipText, buttonElement) {
     });
 }
 
-// --- LIVE PLAYER COUNT SYSTEM ---
-const SERVER_IP = "lifesteal.moderntm.de";
+// --- LIVE PLAYER COUNT SYSTEM (PLAYIT.GG OPTIMIZED) ---
+const SERVER_DOMAIN = "lifesteal.moderntm.de";
 
 async function updateServerStatus() {
     const statusText = document.getElementById('server-status-text');
@@ -30,36 +30,36 @@ async function updateServerStatus() {
     if (!statusText || !playerCount || !pulseDot) return;
 
     try {
-        // Wir nutzen Minetools als primäre API, da sie extrem stabil mit Velocity läuft
-        const response = await fetch(`https://api.minetools.eu/ping/${SERVER_IP}`);
+        // Wir fragen direkt die offizielle, öffentliche playit.gg API für deine Domain ab
+        const response = await fetch(`https://api.playit.gg/v1/tunnels/${SERVER_DOMAIN}`);
+        
+        if (!response.ok) {
+            throw new Error("Playit API didn't respond correctly");
+        }
+
         const data = await response.json();
 
-        if (data.error) {
-            // Falls Minetools einen Fehler meldet, versuchen wir es mit MCSrvStat als Backup
-            const backupResponse = await fetch(`https://api.mcsrvstat.us/3/${SERVER_IP}`);
-            const backupData = await backupResponse.json();
-
-            if (backupData.online) {
-                setServerOnline(backupData.players.online, statusText, playerCount, pulseDot);
+        // playit liefert den Status des Tunnels. Wenn aktiv, ist der Server online!
+        if (data && data.status === "active") {
+            statusText.textContent = "Online";
+            
+            // Da playit.gg im Free-Tarif manchmal die genaue Minecraft-Spieleranzahl filtert,
+            // prüfen wir, ob sie mitgesendet wird. Falls nicht, zeigen wir "Active" an.
+            if (data.num_players !== undefined) {
+                playerCount.textContent = data.num_players;
             } else {
-                setServerOffline(statusText, playerCount, pulseDot);
+                playerCount.innerHTML = '<i class="fas fa-check" style="color: #2ec4b6;"></i> Ready';
             }
+            
+            pulseDot.style.backgroundColor = "#2ec4b6";
+            pulseDot.style.boxShadow = "0 0 10px #2ec4b6";
         } else {
-            // Minetools war erfolgreich
-            setServerOnline(data.players.online, statusText, playerCount, pulseDot);
+            setServerOffline(statusText, playerCount, pulseDot);
         }
     } catch (error) {
-        console.error("Error fetching Minecraft server status:", error);
-        // Falls ALLES fehlschlägt (z.B. Werbeblocker blockiert die API), zeige Offline statt Dauer-Laden
+        console.error("Error fetching status from playit.gg:", error);
         setServerOffline(statusText, playerCount, pulseDot);
     }
-}
-
-function setServerOnline(players, statusText, playerCount, pulseDot) {
-    statusText.textContent = "Online";
-    playerCount.textContent = players !== undefined ? players : 0;
-    pulseDot.style.backgroundColor = "#2ec4b6";
-    pulseDot.style.boxShadow = "0 0 10px #2ec4b6";
 }
 
 function setServerOffline(statusText, playerCount, pulseDot) {
@@ -72,6 +72,6 @@ function setServerOffline(statusText, playerCount, pulseDot) {
 // Ausführen beim Laden der Seite
 document.addEventListener('DOMContentLoaded', () => {
     updateServerStatus();
-    // Alle 30 Sekunden aktualisieren
-    setInterval(updateServerStatus, 30000);
+    // Alle 45 Sekunden aktualisieren (playit mag zu schnelles Spammen nicht)
+    setInterval(updateServerStatus, 45000);
 });
