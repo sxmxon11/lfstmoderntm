@@ -19,59 +19,56 @@ function copyIP(ipText, buttonElement) {
     });
 }
 
-// --- LIVE PLAYER COUNT SYSTEM (PLAYIT.GG OPTIMIZED) ---
-const SERVER_DOMAIN = "lifesteal.moderntm.de";
+// --- LIVE PLAYER COUNT SYSTEM ---
+const SERVER_IP = "lifesteal.moderntm.de";
 
 async function updateServerStatus() {
     const statusText = document.getElementById('server-status-text');
     const playerCount = document.getElementById('player-count');
     const pulseDot = document.querySelector('.pulse-dot');
 
+    // Sicherheitscheck: Falls die HTML-Elemente noch nicht existieren, brich ab
     if (!statusText || !playerCount || !pulseDot) return;
 
     try {
-        // Wir fragen direkt die offizielle, öffentliche playit.gg API für deine Domain ab
-        const response = await fetch(`https://api.playit.gg/v1/tunnels/${SERVER_DOMAIN}`);
+        // Abfrage der primären Minecraft-API
+        const response = await fetch(`https://api.mcsrvstat.us/3/${SERVER_IP}`);
         
         if (!response.ok) {
-            throw new Error("Playit API didn't respond correctly");
+            throw new Error("API response error");
         }
-
+        
         const data = await response.json();
 
-        // playit liefert den Status des Tunnels. Wenn aktiv, ist der Server online!
-        if (data && data.status === "active") {
+        if (data.online === true) {
             statusText.textContent = "Online";
+            // Falls Spieler da sind, zeige die Zahl, ansonsten 0
+            playerCount.textContent = (data.players && data.players.online !== undefined) ? data.players.online : 0;
             
-            // Da playit.gg im Free-Tarif manchmal die genaue Minecraft-Spieleranzahl filtert,
-            // prüfen wir, ob sie mitgesendet wird. Falls nicht, zeigen wir "Active" an.
-            if (data.num_players !== undefined) {
-                playerCount.textContent = data.num_players;
-            } else {
-                playerCount.innerHTML = '<i class="fas fa-check" style="color: #2ec4b6;"></i> Ready';
-            }
-            
+            // Grüner Punkt
             pulseDot.style.backgroundColor = "#2ec4b6";
             pulseDot.style.boxShadow = "0 0 10px #2ec4b6";
         } else {
-            setServerOffline(statusText, playerCount, pulseDot);
+            // Server wird von der API als offline erkannt
+            setOfflineState(statusText, playerCount, pulseDot);
         }
     } catch (error) {
-        console.error("Error fetching status from playit.gg:", error);
-        setServerOffline(statusText, playerCount, pulseDot);
+        console.error("Error fetching server status:", error);
+        // Falls die API blockiert wird, fangen wir den Fehler ab, damit es nicht unendlich lädt
+        setOfflineState(statusText, playerCount, pulseDot);
     }
 }
 
-function setServerOffline(statusText, playerCount, pulseDot) {
+function setOfflineState(statusText, playerCount, pulseDot) {
     statusText.textContent = "Offline";
     playerCount.textContent = "0";
     pulseDot.style.backgroundColor = "#ff3333";
     pulseDot.style.boxShadow = "0 0 10px #ff3333";
 }
 
-// Ausführen beim Laden der Seite
+// Skript starten, sobald das HTML bereit ist
 document.addEventListener('DOMContentLoaded', () => {
     updateServerStatus();
-    // Alle 45 Sekunden aktualisieren (playit mag zu schnelles Spammen nicht)
-    setInterval(updateServerStatus, 45000);
+    // Alle 30 Sekunden im Hintergrund aktualisieren
+    setInterval(updateServerStatus, 30000);
 });
