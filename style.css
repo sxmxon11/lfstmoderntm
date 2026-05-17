@@ -1,4 +1,4 @@
-/* Globale Resets & Variablen */
+/* Global Resets & Variables */
 :root {
     --bg-dark: #0a0512;
     --bg-deep: #05020a;
@@ -22,17 +22,16 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-color);
     overflow-x: hidden;
-    /* Animierter Void-Hintergrund */
     background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, var(--bg-deep) 80%);
 }
 
-/* Liquid-Glass-Effekt Klasse */
+/* Liquid-Glass Effect Class */
 .liquid-glass {
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
-    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Hellerer Rand oben für Reflexion */
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37),
                 inset 0 0 15px rgba(157, 78, 221, 0.05);
     border-radius: 16px;
@@ -47,7 +46,7 @@ body {
     width: 90%;
     max-width: 1200px;
     z-index: 1000;
-    padding: 10px 30px;
+    padding: 15px 30px;
 }
 
 .nav-container {
@@ -57,7 +56,7 @@ body {
 }
 
 .nav-logo {
-    height: 50px; /* Skaliert das 1500x1000 Logo sauber runter */
+    height: 50px;
     width: auto;
     object-fit: contain;
 }
@@ -81,38 +80,25 @@ body {
     text-shadow: 0 0 10px var(--glow-purple);
 }
 
-.btn-shop {
-    background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
-    padding: 8px 20px;
-    border-radius: 20px;
-    box-shadow: 0 0 15px var(--glow-purple);
-    transition: transform 0.3s ease !important;
-}
-
-.btn-shop:hover {
-    transform: scale(1.05);
-    color: #fff !important;
-}
-
 /* Hero Section */
 .hero {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 20px;
+    padding: 120px 20px 60px;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    max-width: 1000px;
 }
 
 .hero-logo {
-    max-width: 450px; /* Angemessene Displaygröße des Hauptlogos */
+    max-width: 450px;
     width: 100%;
     height: auto;
     filter: drop-shadow(0 0 25px rgba(157, 78, 221, 0.6));
@@ -126,27 +112,62 @@ body {
     color: #c9bccc;
 }
 
-/* IP Box mit Glassmorphism */
+/* Layout for Java & Bedrock IPs */
+.ip-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
 .ip-container {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    padding: 10px 10px 10px 25px;
+    justify-content: space-between;
+    padding: 15px 25px;
+    min-width: 340px;
     gap: 20px;
+    text-align: left;
+}
+
+.ip-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.ip-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary-purple);
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.ip-label i {
+    margin-right: 5px;
 }
 
 .ip-text {
     font-family: monospace;
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     font-weight: bold;
-    letter-spacing: 1px;
     color: #fff;
+}
+
+.ip-port {
+    font-size: 0.85rem;
+    color: #9d4edd;
+    font-weight: 600;
+    margin-top: 2px;
 }
 
 .btn-copy {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
-    padding: 10px 20px;
+    padding: 10px 18px;
     border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
@@ -265,7 +286,7 @@ footer {
     color: #665b70;
 }
 
-/* Animationen */
+/* Animations */
 @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
@@ -277,10 +298,10 @@ footer {
     100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 196, 182, 0); }
 }
 
-/* Responsive Anpassungen */
+/* Responsive Layout */
 @media (max-width: 768px) {
-    .nav-links { display: none; } /* Für eine vollwertige Mobile-Nav müsste man ein Hamburger-Menü ergänzen */
+    .nav-links { display: none; }
     .hero-logo { max-width: 300px; }
-    .ip-container { flex-direction: column; padding: 20px; width: 100%; }
+    .ip-container { width: 100%; }
     .status-card { padding: 30px; }
 }
