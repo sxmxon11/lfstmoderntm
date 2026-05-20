@@ -24,49 +24,18 @@
     </header>
 
     <section id="home" class="hero">
-        <div class="hero-overlay"></div>
         <div class="hero-content">
             <img src="voidsmp.png" alt="Void SMP Logo" class="hero-logo">
-            <p class="hero-subtitle">A unique survival experience in the endless void. Are you ready to step into the darkness?</p>
+            <p class="hero-subtitle">A unique survival experience in the endless void.</p>
             
             <div class="ip-wrapper">
                 <div class="ip-container liquid-glass">
                     <div class="ip-info">
                         <span class="ip-label"><i class="fab fa-java"></i> Java Edition</span>
-                        <span class="ip-text" id="java-ip">lifesteal.moderntm.de</span>
+                        <span class="ip-text">lifesteal.moderntm.de</span>
                     </div>
                     <button class="btn-copy" onclick="copyIP('lifesteal.moderntm.de', this)"><i class="far fa-copy"></i> Copy</button>
                 </div>
-
-                <div class="ip-container liquid-glass">
-                    <div class="ip-info">
-                        <span class="ip-label"><i class="fas fa-mobile-alt"></i> Bedrock Edition</span>
-                        <span class="ip-text" id="bedrock-ip">brlifesteal.moderntm.de</span>
-                        <span class="ip-port">Port: 3318</span>
-                    </div>
-                    <button class="btn-copy" onclick="copyIP('brlifesteal.moderntm.de', this)"><i class="far fa-copy"></i> Copy</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="features-section">
-        <h2 class="section-title">Why Void SMP?</h2>
-        <div class="features-grid">
-            <div class="feature-card liquid-glass">
-                <i class="fas fa-heart-broken feature-icon"></i>
-                <h3>Lifesteal Mechanics</h3>
-                <p>Eliminate your enemies to steal their hearts, or risk losing yours if you fall in battle.</p>
-            </div>
-            <div class="feature-card liquid-glass">
-                <i class="fas fa-shield-alt feature-icon"></i>
-                <h3>Grief Prevention</h3>
-                <p>Secure your builds and play peacefully with your friends without the fear of destruction.</p>
-            </div>
-            <div class="feature-card liquid-glass">
-                <i class="fas fa-coins feature-icon"></i>
-                <h3>Player Economy</h3>
-                <p>Trade with players, set up your own shops, and become the wealthiest tycoon in the Void.</p>
             </div>
         </div>
     </section>
@@ -75,16 +44,16 @@
         <div class="status-card liquid-glass">
             <h2>Server Status</h2>
             <div class="status-indicator">
-                <span class="pulse-dot"></span>
+                <span class="pulse-dot" id="pulse-dot"></span>
                 <span id="server-status-text">Loading...</span>
             </div>
-            <p class="player-count"><strong id="player-count"><i class="fas fa-spinner fa-spin"></i></strong> players online</p>
+            <p class="player-count"><strong id="player-count">0</strong> players online</p>
             <p class="version">Version: 1.20.X - 1.21</p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Void SMP. All rights reserved. Not affiliated with Mojang/Microsoft.</p>
+        <p>&copy; 2026 Void SMP. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
